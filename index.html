@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>連立方程式（540x+560y=a, x+y=b）ソルバー</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>連立方程式ソルバー</h1>
+    <p class="desc">
+      式： <code>540x + 560y = a</code>、<code>x + y = b</code><br />
+      a と b を整数で入力すると、整数解 (x, y) を表示します（存在しない場合はその旨を表示）。
+    </p>
+
+    <div class="form-row">
+      <label for="a">a（整数）</label>
+      <input id="a" type="text" inputmode="numeric" placeholder="例: 10000" />
+    </div>
+
+    <div class="form-row">
+      <label for="b">b（整数）</label>
+      <input id="b" type="text" inputmode="numeric" placeholder="例: 10" />
+    </div>
+
+    <button id="solveBtn">解を求める</button>
+
+    <div id="result" aria-live="polite"></div>
+
+    <details class="notes">
+      <summary>仕組み（短く）</summary>
+      <p>
+        x + y = b → x = b - y を代入し、540(b - y) + 560y = a → 540b + 20y = a  
+        よって <code>y = (a - 540b) / 20</code>。分子が20で割り切れると整数解が得られます。
+      </p>
+    </details>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
