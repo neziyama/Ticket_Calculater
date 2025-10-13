@@ -24,7 +24,7 @@ solveBtn.addEventListener("click", () => {
   // バリデーション
   if (!isIntegerString(aStr) || !isIntegerString(bStr)) {
     resultDiv.style.color = "var(--warn)";
-    resultDiv.textContent = "⚠️ a と b は整数（例: -123, 0, 456）で入力してください。";
+    resultDiv.textContent = "⚠️ a と b は非負整数（例: 1, 0, 15 etc.）で入力してください。";
     return;
   }
 
@@ -55,8 +55,8 @@ solveBtn.addEventListener("click", () => {
     resultDiv.style.color = "var(--ok)";
     resultDiv.textContent =
       "✅ 整数解が見つかりました。\n" +
-      `x = ${bigIntToStr(x)}\n` +
-      `y = ${bigIntToStr(y)}\n\n` +
+      `x(540円のチケットの枚数) = ${bigIntToStr(x)}\n` +
+      `y(560円のチケットの枚数) = ${bigIntToStr(y)}\n\n` +
       "（計算メモ）\n" +
       `y = (a - 540·b) / 20 = (${a.toString()} - 540·${b.toString()}) / 20 = ${numerator.toString()} / 20`;
   } catch (err) {
