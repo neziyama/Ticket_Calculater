@@ -27,7 +27,7 @@ body {
   box-shadow: 0 8px 20px var(--shadow);
   border-radius: 15px;
   padding: 25px 25px 40px;
-  max-width: 600px;
+  max-width: 450px;
   width: 100%;
   text-align: center;
 }
@@ -57,7 +57,7 @@ h1 {
 
 label {
   font-weight: bold;
-  width: 35px;
+  width: 200px;
   text-align: right;
   color: #333;
 }
