@@ -1,67 +1,66 @@
-// script.js
-// BigInt を使って大きな整数にも対応。
-// 入力は整数文字列のみ受け付ける（小数・空白は不可）。
-
-const aInput = document.getElementById("a");
-const bInput = document.getElementById("b");
-const solveBtn = document.getElementById("solveBtn");
 const resultDiv = document.getElementById("result");
+const historyList = document.getElementById("history");
+const clearBtn = document.getElementById("clearHistoryBtn");
 
-// 整数（符号付き）文字列かを判定
-function isIntegerString(s) {
-  return /^-?\d+$/.test(s.trim());
-}
+document.getElementById("solveBtn").addEventListener("click", () => {
+  const cVal = document.getElementById("c").value.trim();
+  const eVal = document.getElementById("e").value.trim();
+  const dVal = document.getElementById("d").value.trim();
 
-// 表示用に BigInt を普通の文字列に変換（負のゼロなどの問題なし）
-function bigIntToStr(n) {
-  return n.toString();
-}
-
-solveBtn.addEventListener("click", () => {
-  const aStr = aInput.value.trim();
-  const bStr = bInput.value.trim();
-
-  // バリデーション
-  if (!isIntegerString(aStr) || !isIntegerString(bStr)) {
+  // 入力チェック
+  if (![cVal, eVal, dVal].every(v => /^-?\d+$/.test(v))) {
     resultDiv.style.color = "var(--warn)";
-    resultDiv.textContent = "⚠️ a と b は非負整数（例: 1, 0, 15 etc.）で入力してください。";
+    resultDiv.textContent = "⚠️ c, e, d は整数で入力してください。";
     return;
   }
 
-  try {
-    const a = BigInt(aStr);
-    const b = BigInt(bStr);
+  const c = BigInt(cVal);
+  const e = BigInt(eVal);
+  const d = BigInt(dVal);
 
-    // 計算 (BigInt)
-    // y = (a - 540*b) / 20  が整数であることを確認
-    const twenty = 20n;
-    const fiveForty = 540n;
+  // 与式より a, b を計算
+  const b = c - d;
+  const a = e - 540n * d;
 
-    const numerator = a - fiveForty * b;
-    const remainder = numerator % twenty;
+  // y = (a - 520b) / 40
+  const numerator = a - 520n * b;
+  const denominator = 40n;
 
-    if (remainder !== 0n) {
-      resultDiv.style.color = "var(--warn)";
-      // remainder が負になる場合を分かりやすく表示するため absolute 取らないでそのまま示す
-      resultDiv.textContent =
-        "❌ 整数解は存在しません。\n" +
-        `理由: y = (a - 540*b) / 20 となりますが、分子 (a - 540*b) = ${numerator.toString()} は 20 で割り切れません（余り ${remainder.toString()}）。`;
-      return;
+  let message = "";
+  let isRejected = false;
+  let x, y;
+
+  if (numerator % denominator !== 0n) {
+    message = `❌ 棄却：y が整数になりません。`;
+    isRejected = true;
+  } else {
+    y = numerator / denominator;
+    x = b - y;
+
+    if (x <= 0n || y <= 0n) {
+      message = `❌ 棄却：x=${x}, y=${y} は正の整数ではありません。`;
+      isRejected = true;
+    } else {
+      message = `✅ 解：x=${x}, y=${y}（a=${a}, b=${b}）`;
     }
-
-    const y = numerator / twenty;
-    const x = b - y;
-
-    resultDiv.style.color = "var(--ok)";
-    resultDiv.textContent =
-      "✅ 整数解が見つかりました。\n" +
-      `x(540円のチケットの枚数) = ${bigIntToStr(x)}\n` +
-      `y(560円のチケットの枚数) = ${bigIntToStr(y)}\n\n` +
-      "（計算メモ）\n" +
-      `y = (a - 540·b) / 20 = (${a.toString()} - 540·${b.toString()}) / 20 = ${numerator.toString()} / 20`;
-  } catch (err) {
-    resultDiv.style.color = "var(--warn)";
-    resultDiv.textContent = "エラーが発生しました。入力が非常に大きすぎる等、予期せぬ値の可能性があります。";
-    console.error(err);
   }
+
+  // 結果を表示
+  resultDiv.style.color = isRejected ? "var(--warn)" : "var(--ok)";
+  resultDiv.textContent = message;
+
+  // 履歴に追加
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <strong>c=${c}</strong>, e=${e}, d=${d} → 
+    ${isRejected ? "<span style='color:var(--warn)'>棄却</span>" :
+      `<span style='color:var(--ok)'>x=${x}, y=${y}</span> (a=${a}, b=${b})`}
+  `;
+  historyList.prepend(li);
+});
+
+// 履歴クリアボタン
+clearBtn.addEventListener("click", () => {
+  historyList.innerHTML = "";
+  resultDiv.textContent = "";
 });

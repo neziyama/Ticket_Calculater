@@ -1,38 +1,56 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>連立方程式（540x+560y=a, x+y=b）ソルバー</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>連立方程式ソルバー｜c,e,d から x,y を求める</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>チケット枚数カウンター　β版</h1>
+    <h1>🔢 連立方程式ソルバー</h1>
     <p class="desc">
-      式： <code>540x + 560y = a</code>、<code>x + y = b</code><br />
-      a(540円,560円のチケットの合計金額) と b(540円,560円のチケットの合計枚数) を入力すると、 (x:540円のチケットの枚数,y:560円のチケットの枚数) を表示します（存在しない場合はその旨を表示）。明らかに大きすぎる数字や負の数が出た場合には金額や枚数の合計が正しいか確認してみてください。
+      次の式に基づいて整数解 (x, y) を求めます：<br>
+      520x + 560y = a,　x + y = b,　b = c - d,　a = e - 540d<br><br>
+      <small>※x, y が正の整数以外のときは棄却されます</small>
     </p>
 
+    <!-- 入力フォーム -->
     <div class="form-row">
-      <label for="a">a(540円,560円のチケットの合計金額)</label>
-      <input id="a" type="text" inputmode="numeric" placeholder="例: 10000" />
+      <label for="c">c：</label>
+      <input id="c" type="number" placeholder="整数を入力">
+    </div>
+    <div class="form-row">
+      <label for="e">e：</label>
+      <input id="e" type="number" placeholder="整数を入力">
+    </div>
+    <div class="form-row">
+      <label for="d">d：</label>
+      <input id="d" type="number" placeholder="整数を入力">
     </div>
 
-    <div class="form-row">
-      <label for="b">b(540円,560円のチケットの合計枚数) </label>
-      <input id="b" type="text" inputmode="numeric" placeholder="例: 10" />
+    <button id="solveBtn">✨ 解を求める</button>
+
+    <!-- 結果表示 -->
+    <div id="result"></div>
+
+    <hr>
+
+    <!-- 計算履歴 -->
+    <div id="history-container">
+      <h2>🧮 計算履歴</h2>
+      <button id="clearHistoryBtn">履歴をクリア</button>
+      <ul id="history"></ul>
     </div>
 
-    <button id="solveBtn">解を求める</button>
-
-    <div id="result" aria-live="polite"></div>
-
+    <!-- 計算式の詳細 -->
     <details class="notes">
-      <summary>仕組み（短く）</summary>
+      <summary>📘 計算過程の確認</summary>
       <p>
-        x + y = b → x = b - y を代入し、540(b - y) + 560y = a → 540b + 20y = a  
-        よって <code>y = (a - 540b) / 20</code>。分子が20で割り切れると整数解が得られます。
+        b = c - d<br>
+        a = e - 540d<br>
+        ⇒ 520x + 560y = a, x + y = b より<br>
+        y = (a - 520b) / 40,　x = b - y
       </p>
     </details>
   </div>
