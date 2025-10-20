@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>連立方程式ソルバー｜c,e,d から x,y を求める</title>
+  <title>チケット計算ツール｜c,e,d から x,y を求める</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>🔢 連立方程式ソルバー</h1>
+    <h1>チケット計算ツール　ver.1.2.0</h1>
     <p class="desc">
       次の式に基づいて整数解 (x, y) を求めます：<br>
       520x + 560y = a,　x + y = b,　b = c - d,　a = e - 540d<br><br>
@@ -17,19 +17,19 @@
 
     <!-- 入力フォーム -->
     <div class="form-row">
-      <label for="c">c：</label>
+      <label for="c">チケット総数：</label>
       <input id="c" type="number" placeholder="整数を入力">
     </div>
     <div class="form-row">
-      <label for="e">e：</label>
+      <label for="e">チケット総額：</label>
       <input id="e" type="number" placeholder="整数を入力">
     </div>
     <div class="form-row">
-      <label for="d">d：</label>
+      <label for="d">540円のチケット枚数：</label>
       <input id="d" type="number" placeholder="整数を入力">
     </div>
 
-    <button id="solveBtn">✨ 解を求める</button>
+    <button id="solveBtn">解を求める</button>
 
     <!-- 結果表示 -->
     <div id="result"></div>

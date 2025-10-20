@@ -27,7 +27,7 @@ body {
   box-shadow: 0 8px 20px var(--shadow);
   border-radius: 15px;
   padding: 25px 25px 40px;
-  max-width: 450px;
+  max-width: 600px;
   width: 100%;
   text-align: center;
 }
