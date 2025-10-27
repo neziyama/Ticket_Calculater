@@ -10,7 +10,7 @@ document.getElementById("solveBtn").addEventListener("click", () => {
   // 入力チェック
   if (![cVal, eVal, dVal].every(v => /^-?\d+$/.test(v))) {
     resultDiv.style.color = "var(--warn)";
-    resultDiv.textContent = "⚠️ c, e, d は整数で入力してください。";
+    resultDiv.textContent = "⚠️ 整数で入力してください。";
     return;
   }
 
@@ -31,17 +31,17 @@ document.getElementById("solveBtn").addEventListener("click", () => {
   let x, y;
 
   if (numerator % denominator !== 0n) {
-    message = `❌ 棄却：y が整数になりません。`;
+    message = `❌ 棄却：整数になりません。`;
     isRejected = true;
   } else {
     y = numerator / denominator;
     x = b - y;
 
-    if (x <= 0n || y <= 0n) {
-      message = `❌ 棄却：x=${x}, y=${y} は正の整数ではありません。`;
+    if (x < 0n || y < 0n) {
+      message = `❌ 棄却：答えが正しくありません。`;
       isRejected = true;
     } else {
-      message = `✅ 解：x=${x}, y=${y}（a=${a}, b=${b}）`;
+      message = `✅ 解：520円のチケット枚数(x)=${x}枚, 560円のチケット枚数(y)=${y}枚`;
     }
   }
 
@@ -52,9 +52,9 @@ document.getElementById("solveBtn").addEventListener("click", () => {
   // 履歴に追加
   const li = document.createElement("li");
   li.innerHTML = `
-    <strong>c=${c}</strong>, e=${e}, d=${d} → 
+    <strong>チケット総数=${c}枚</strong>, 総額=${e}円, 540円のチケット枚数=${d}枚 → 
     ${isRejected ? "<span style='color:var(--warn)'>棄却</span>" :
-      `<span style='color:var(--ok)'>x=${x}, y=${y}</span> (a=${a}, b=${b})`}
+      `<span style='color:var(--ok)'>520円のチケット枚数(x)=${x}枚, 560円のチケット枚数(y)=${y}枚</span> `}
   `;
   historyList.prepend(li);
 });
