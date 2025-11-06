@@ -1,6 +1,6 @@
 /* 🌈 カラフル＆スマホ対応デザイン */
 :root {
-  --bg: linear-gradient(135deg, #f0f9ff, #c8e7ff);
+  --bg: linear-gradient(135deg, #c8e7ff, #c8e7ff);
   --accent: #0078d7;
   --text: #222;
   --ok: #009e4f;
@@ -85,7 +85,7 @@ button {
   font-size: 1.2rem;
   font-weight: bold;
   color: #fff;
-  background: linear-gradient(90deg, #ff6a00, #ee0979);
+  background: linear-gradient(90deg, #ff6a00, #ff6a00);
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -97,7 +97,7 @@ button {
 button:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(90deg, #ff9600, #ff007f);
+  background: linear-gradient(90deg, #ff9600, #ff9600);
 }
 
 button:active {
@@ -193,7 +193,7 @@ details p {
 
 /* 🧹 履歴クリアボタン */
 #clearHistoryBtn {
-  background: linear-gradient(90deg, #0078d7, #00bcd4);
+  background: linear-gradient(90deg, #0078d7, #0078d7);
   color: #fff;
   border: none;
   padding: 10px 18px;
@@ -206,6 +206,6 @@ details p {
 }
 
 #clearHistoryBtn:hover {
-  background: linear-gradient(90deg, #0090ff, #00d9e6);
+  background: linear-gradient(90deg, #00d9e6, #00d9e6);
   transform: scale(1.05);
 }
